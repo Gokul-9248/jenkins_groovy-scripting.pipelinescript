@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout the code from github'){
+            steps{
+                 git url: 'https://github.com/Gokul-9248/DevOpsClassCodes.git'
+                 echo 'github url checkout'
+            }
+        }
+        stage('codecompile with GOKUL'){
+            steps{
+                echo 'starting compiling'
+                sh 'mvn compile'
+            }
+        }
+        stage('codetesting with GOKUL'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('qa with GOKUL'){
+            steps{
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+        stage('package with GOKUL'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+    }
+}
